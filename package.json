@@ -1,0 +1,18 @@
+{
+  "name": "block-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mahima Hans",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "ejs-html": "^5.1.5",
+    "express": "^4.16.4",
+    "html": "^1.0.0",
+    "mongoose": "^5.4.10"
+  }
+}
