@@ -7,17 +7,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
-var Web3 = require('web3')
-var accounts = require('web3-eth-accounts')
+//var Web3 = require('web3')
+//var accounts = require('web3-eth-accounts')
 
 var mongoose = require('mongoose');
-<<<<<<< Updated upstream
-=======
 var ipfsClient = require('ipfs-http-client')
 var ipfs = ipfsClient('ipfs.infura.io', '5001', {
   protocol: 'https'
 })
->>>>>>> Stashed changes
 
 
 paypal.configure({
@@ -26,10 +23,7 @@ paypal.configure({
   'client_secret': 'EM5shg6NZLo-pFW_nmh_1PPprXPMyKSaS6gf3z7Mb2xzC50aadZg0xFxM5rbKN18_vJIm7pOetVsvtOw'
 });
 
-<<<<<<< Updated upstream
 var axios=require('axios');
-=======
->>>>>>> Stashed changes
 // let ejs = require('ejs-html')
 //
 // let html = ejs.render('<input type="text" disabled="<%=disabled%>" value="<%=value%>" />', {
@@ -305,25 +299,41 @@ app.get("/pay", function(req,res){
   res.render('pay.ejs');
 });
 
-app.post("/user", function(req,res){
-  var username = req.body.name;
-  var email = req.body.email;
-  var amount = req.body.amount;
+// app.post("/user", function(req,res){
+//   var username = req.body.name;
+//   var email = req.body.email;
+//   var amount = req.body.amount;
 
-  // var newUser = {
-  //   name: username,
-  //   address:email,
-  //   amount:amount
-  // }
-  // user.create(newUser, function(err, newUser){
-  //   if(err){
-  //     console.log(err);
+//   var newUser = {
+//     name: username,
+//     address:email,
+//     amount:amount
+//   }
+//   user.create(newUser, function(err, newUser){
+//     if(err){
+//       console.log(err    console.log("Get Payment Response");
+//         console.log(JSON.stringify(payment));
+//         res.send('Success');
+//     } 
+// });
+// });
+
+
+app.get('/cancel', function(req, res){
+  res.send("Cancelled");
+})
+
+ app.set('port', process.env.PORT || 3000);
+ app.listen(3000, function(){
+   console.log("the server has started");
+ });
+// );
   //   }
   //   else{
   //     res.redirect("/pay");
   //   }
   // })
-});
+// });
 
 
 app.get("/abc", function(req, res){
@@ -404,76 +414,10 @@ app.post("/details", function(req,res){
     else{
       res.redirect("/");
     }
-<<<<<<< Updated upstream
-  }) 
-});
-
-
-
-//-////////////////////////////////////for ipfs
-/*
-
-app.post('/ipfs_add', upload.single('myfile'), function (req, res, next) {
-  console.log("test");
-  var uploadfile = req.file;
-  if (!req.file) {
-    return res.send('please upload a file')
-  }
-  let testFile = fs.readFileSync(uploadfile.path);
-  const encryptedString = cryptr.encrypt(testFile);
-  const decryptedString = cryptr.decrypt(encryptedString);
-  //console.log(data);
-
-  console.log(encryptedString);
-  console.log(decryptedString);
-  //console.log(testFile);
-  ipfs.add(testFile, function (err, file) {
-    if (err) {
-      console.log(err, file);
-    }
-    console.log(file[0]);
-
-    //var instance= new hashes({path: 'QmP4dRocBy2PZB9dSBGQz3TPfBdAe2fwPm6q2hzwy2Jivn', hash:'QmP4dRocBy2PZB9dSBGQz3TPfBdAe2fwPm6q2hzwy2Jivn', size:'50'});
-    
-    var instance= new hashes ({ result:file[0].hash})
-    instance.save(function(err,book){
-      if (err) return console.log("cant be uploaded to db");
-      console.log(book.result[0] + "hash is saved")
-    
-    })
-    
-    res.send(file);
-  })
-});
-
-app.post('/ipfsget', function (req, res) {
-
-  console.log(req.body.hash)
-
-  //var validCID = "QmP4dRocBy2PZB9dSBGQz3TPfBdAe2fwPm6q2hzwy2Jivn";
-  var validCID = req.body.hash;
-  console.log(req.body);
-  ipfs.get(validCID, function (err, files) {
-    (files).forEach((file) => {
-     // const decryptedString = cryptr.decrypt(encryptedString);
-
-      console.log(file.path)
-      console.log(file.content.toString('utf8'))
-      res.send(file.content.toString('utf8'))
-    })
-  })
-})
-*/
-
-
-
-
-=======
   })
 
 });
 
->>>>>>> Stashed changes
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + "/public"))
 
@@ -503,12 +447,48 @@ app.get('/success', function(req, res){
 });
 });
 
+/*
+var uploadfile = req.file;
+  if (!req.file) {
+    return res.send('please upload a file')
+  }
+  let testFile = fs.readFileSync(uploadfile.path);
+  const encryptedString = cryptr.encrypt(testFile);
+  const decryptedString = cryptr.decrypt(encryptedString);
+
+  console.log(encryptedString);
+  console.log(decryptedString);
+  //console.log(testFile);
+  ipfs.add(testFile, function (err, file) {
+    if (err) {
+      console.log(err, file);
+    }
+    console.log(file[0]);
+    // var ipfsshash= file[0].hash;
+   // let instance = new hashes({ hash: file[0].hash });
+    let instance = new hashes({ hash: "QmTDvbSnKgntL596jKypKGknqGRtcWB1xqPefaDbWv3FDx"});
+    instance.save(function (err, book) {
+      if (err) return console.log("cant be uploaded to db");
+      console.log(book.file[0].hash + "hash is saved")
+
+    })
+    resulthash = file[0]
+
+    // if (Response.statusCode == 200) {
+    //   router.post('/', ipfscontroller.addtobchain);
+    // }
+  })
+  if (res.status != 200) {
+    console.error('failed, retry');
+  }
+  */
+
 
 app.get('/cancel', function(req, res){
   res.send("Cancelled");
 })
 
- app.set('port', process.env.PORT || 3000);
- app.listen(3000, function(){
+ app.set('port', process.env.PORT || 8000);
+ app.listen(8000, function(){
    console.log("the server has started");
  });
