@@ -118,10 +118,30 @@ app.get("/", function(req,res){
   })
 });
 
+// app.get("/abc", function(req, res){
+//   res
+//   fs.readFile('./pay', null, function(error, data){
+//     if(error){
+//       console.log(error);
+//     }
+//     else{
+//       res.write(data);
+//         }
+//         res.end();
+//   })
+// });
+
 app.post("/face", function(req,res){
   console.log(fname+" "+lname);
 
 })
+// var options = {  amount: 50000,  // amount in the smallest currency unit 
+//    currency: "INR",  
+//    receipt: "order_rcptid_11", 
+//     payment_capture: '0'};
+//     instance.orders.create(options, function(err, order) {  
+//       console.log(order);
+// });
 
 app.get("/volunteer", function(req,res){
   res.render("volunteer.ejs");
