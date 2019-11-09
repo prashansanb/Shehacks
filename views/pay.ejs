@@ -181,10 +181,17 @@
                         "last inserted value into the blockchain is : " + xname;
                     //var sum= xname;
                     //     const amt= JSON.stringify({xname});
+  
                     axios({
                         method: 'post',
                         url: '/qwerty',
+<<<<<<< HEAD
                         data: JSON.stringify(xname)
+=======
+                        data: {
+                            net: "abcd"
+                        }
+>>>>>>> 80867b888baa45a1505f87c37d2f3016385da84f
                     }).then(function (res) {
                         console.log("getvalue executed");
                     });
@@ -253,7 +260,7 @@
         } catch (err) {
             var values = document.getElementById('xvalue');
             document.getElementById("xvalue").innerHTML = err;
-            console.log("qwerty");
+          //  console.log("qwerty");
             // console.log(values.value);
             //  console.log(xname);
 
