@@ -340,6 +340,9 @@ app.get("/abc", function(req, res){
   res.render('paypal.ejs');
 })
 app.post("/qwerty", function(req, res){
+  console.log("working axios");
+  console.log(req.data);
+ /*
   var val = req.data;
   var ans = 0;
   db.amounts.find().forEach(function(abc){
@@ -358,6 +361,7 @@ app.post("/qwerty", function(req, res){
       res.redirect("/pay");
     }
   })
+  */
 })
 
 app.post("/paypal",function(req, res){
@@ -447,7 +451,11 @@ app.get('/success', function(req, res){
 });
 });
 
-/*
+
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+
 var uploadfile = req.file;
   if (!req.file) {
     return res.send('please upload a file')
@@ -457,31 +465,32 @@ var uploadfile = req.file;
   const decryptedString = cryptr.decrypt(encryptedString);
 
   console.log(encryptedString);
-  console.log(decryptedString);
+ // console.log(decryptedString);
   //console.log(testFile);
   ipfs.add(testFile, function (err, file) {
     if (err) {
       console.log(err, file);
     }
-    console.log(file[0]);
+    else{
+      console.log(file[0]);
+    }
+    
     // var ipfsshash= file[0].hash;
    // let instance = new hashes({ hash: file[0].hash });
+  /* 
     let instance = new hashes({ hash: "QmTDvbSnKgntL596jKypKGknqGRtcWB1xqPefaDbWv3FDx"});
     instance.save(function (err, book) {
       if (err) return console.log("cant be uploaded to db");
       console.log(book.file[0].hash + "hash is saved")
-
+m
     })
-    resulthash = file[0]
+*/
 
-    // if (Response.statusCode == 200) {
-    //   router.post('/', ipfscontroller.addtobchain);
-    // }
+   var asresulthh = file[0]
+console.log(resulthash)
   })
-  if (res.status != 200) {
-    console.error('failed, retry');
-  }
-  */
+})
+  
 
 
 app.get('/cancel', function(req, res){
