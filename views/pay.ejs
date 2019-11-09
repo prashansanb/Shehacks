@@ -184,16 +184,14 @@
                     axios({
                         method: 'post',
                         url: '/qwerty',
-                        data: {
-                            net: xname
-                        }
+                        data: JSON.stringify(xname)
                     }).then(function (res) {
                         console.log("getvalue executed");
                     });
 
                 }
             });
-            console.log("getvalue executed");
+            //console.log("getvalue executed");
 
         } catch (err) {
             document.getElementById("xbalance").innerHTML = err;
@@ -262,6 +260,17 @@
         }
 
     }
+
+   function abc(){
+    var xvalue = document.getElementById("xvalue");
+    var don = document.getElementById("don");
+    var donbtn = document.getElementById("donbtn");
+    xvalue.value = don.value;
+    var Button1 = document.getElementById("Button1");
+    Button1.click();
+    var myform = document.getElementById("myform");
+    myform.reset();
+   }
 </script>
 
 <body>
@@ -269,7 +278,7 @@
     <div id="metamask"></div>
     <h1 style="text-align: center; font-family: fantasy; font-weight: 400">Donate Here</h1>
 
-    <form method="post" action="/paypal">
+    <form method="post" action="/paypal" id = "myform">
 
         <ul class="form-style-1">
             <li>
@@ -286,11 +295,11 @@
             </li>
             <li>
                 <label>Donation(INR) <span class="required">*</span></label>
-                <input type="text" name="amount" class="field-long" />
+                <input id = "don" type="text" name="amount" class="field-long" />
             </li>
 
             <li>
-                <input type="submit" value="Submit" />
+                <input id="donbtn" type="submit" value="Submit" onclick="abc()" />
             </li>
 
 
@@ -298,7 +307,7 @@
     </form>
 
 
-    <table>
+    <table style="visibility: hidden;">
         <tr>
             <td></td>
             <td>

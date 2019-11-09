@@ -312,24 +312,25 @@ app.get("/abc", function(req, res){
   res.render('paypal.ejs');
 })
 app.post("/qwerty", function(req, res){
-  var val = req.data;
-  var ans = 0;
-  db.amounts.find().forEach(function(abc){
-    ans = ans+abc.currentAmt;
-  });
-  ans = ans+val;
-  var newamount = {
-    currentAmt: val,
-    netDonation: ans
-  };
-  amount.create(newamount, function(err, newlycreated){
-    if(err){
-      console.log(err);
-    } else{
-      console.log(newlycreated);
-      res.redirect("/pay");
-    }
-  })
+  var val = req.body.data;
+  console.log(val);
+  // var ans = 0;
+  // db.amounts.find().forEach(function(abc){
+  //   ans = ans+abc.currentAmt;
+  // });
+  // ans = ans+val;
+  // var newamount = {
+  //   currentAmt: val,
+  //   netDonation: ans
+  // };
+  // amount.create(newamount, function(err, newlycreated){
+  //   if(err){
+  //     console.log(err);
+  //   } else{
+  //     console.log(newlycreated);
+  //     res.redirect("/pay");
+  //   }
+  // })
 })
 
 app.post("/paypal",function(req, res){
