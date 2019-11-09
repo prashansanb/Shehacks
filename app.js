@@ -95,7 +95,32 @@ app.get("/volunteer", function(req,res){
   //       res.end();
   // })
 });
-
+app.get("/adoption", function(req,res){
+  res.render("adoption.ejs");
+  // res.writeHead(200, {'Content-Type': 'text/html'});
+  // fs.readFile('./index.html', null, function(error, data){
+  //   if(error){
+  //     console.log(error);
+  //   }
+  //   else{
+  //     res.write(data);
+  //       }
+  //       res.end();
+  // })
+});
+app.get("/petadoption", function(req,res){
+  res.render("petadoption.ejs");
+  // res.writeHead(200, {'Content-Type': 'text/html'});
+  // fs.readFile('./index.html', null, function(error, data){
+  //   if(error){
+  //     console.log(error);
+  //   }
+  //   else{
+  //     res.write(data);
+  //       }
+  //       res.end();
+  // })
+});
 app.get("/ngos", function(req,res){
   NGO.find({}, function(err, allngos){
     if(err){
