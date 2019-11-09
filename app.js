@@ -6,7 +6,6 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 var mongoose = require('mongoose');
-<<<<<<< Updated upstream
 
 
 paypal.configure({
@@ -15,10 +14,7 @@ paypal.configure({
   'client_secret': 'EM5shg6NZLo-pFW_nmh_1PPprXPMyKSaS6gf3z7Mb2xzC50aadZg0xFxM5rbKN18_vJIm7pOetVsvtOw'
 });
 
-=======
 var axios=require('axios');
-axios.post('qwerty');
->>>>>>> Stashed changes
 // let ejs = require('ejs-html')
 //
 // let html = ejs.render('<input type="text" disabled="<%=disabled%>" value="<%=value%>" />', {
@@ -69,7 +65,7 @@ var adoptionFormSchema = new mongoose.Schema({
   reason: String
 });
 
-var petadoptionSchema = new mongoose.schema({
+var petadoptionSchema = new mongoose.Schema({
   name: String,
   email: String,
   phoneNo: Number,
@@ -295,6 +291,26 @@ app.post("/user", function(req,res){
 app.get("/abc", function(req, res){
   res.render('paypal.ejs');
 })
+app.post("/qwerty", function(req, res){
+  var val = req.data;
+  var ans = 0;
+  db.amounts.find().forEach(function(abc){
+    ans = ans+abc.currentAmt;
+  });
+  ans = ans+val;
+  var newamount = {
+    currentAmt: val,
+    netDonation: ans
+  };
+  amount.create(newamount, function(err, newlycreated){
+    if(err){
+      console.log(err);
+    } else{
+      console.log(newlycreated);
+      res.redirect("/pay");
+    }
+  })
+})
 
 app.post("/paypal",function(req, res){
   var amt = req.params.amount;
@@ -350,35 +366,9 @@ app.post("/details", function(req,res){
     else{
       res.redirect("/");
     }
-  })
-
-<<<<<<< Updated upstream
+  }) 
 });
-=======
-})
 
-
-app.post("/qwerty", function(req,res){
- // var sum=req.body.;
- console.log(req.body);
- console.log(req.data.net);
- console.log(req);
- 
- 
- /*
-  var newamount={currentAmt:xname};
-  amount.create(newamount,function(err,newlycreated){
-    if(err){
-      console.log(err);
-    }
-    else{
-      res.redirect('/pay');
-    }
-  })
-
-  */
-})
-//axios.get('/qwerty').then
 
 
 //-////////////////////////////////////for ipfs
@@ -439,7 +429,6 @@ app.post('/ipfsget', function (req, res) {
 
 
 
->>>>>>> Stashed changes
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + "/public"))
 
