@@ -11,6 +11,8 @@ var upload = multer({ dest: 'uploads/' })
 //var accounts = require('web3-eth-accounts')
 
 var mongoose = require('mongoose');
+
+
 var ipfsClient = require('ipfs-http-client')
 var ipfs = ipfsClient('ipfs.infura.io', '5001', {
   protocol: 'https'
@@ -167,6 +169,7 @@ app.get("/volunteer", function(req,res){
 });
 
 app.post("/adopt", function(req, res){
+console.log("route2working")
   var name = req.body.name;
   var email = req.body.email;
   var phoneNo = req.body.phoneNo;
@@ -193,6 +196,7 @@ app.post("/adopt", function(req, res){
     if(err){
       console.log(err);
     } else{
+      console.log("royre 2 working");
       res.redirect("/");
     }
   });
@@ -340,27 +344,6 @@ app.get("/abc", function(req, res){
   res.render('paypal.ejs');
 })
 app.post("/qwerty", function(req, res){
-<<<<<<< HEAD
-  var val = req.body.data;
-  console.log(val);
-  // var ans = 0;
-  // db.amounts.find().forEach(function(abc){
-  //   ans = ans+abc.currentAmt;
-  // });
-  // ans = ans+val;
-  // var newamount = {
-  //   currentAmt: val,
-  //   netDonation: ans
-  // };
-  // amount.create(newamount, function(err, newlycreated){
-  //   if(err){
-  //     console.log(err);
-  //   } else{
-  //     console.log(newlycreated);
-  //     res.redirect("/pay");
-  //   }
-  // })
-=======
   console.log("working axios");
   console.log(req.data);
  /*
@@ -383,7 +366,6 @@ app.post("/qwerty", function(req, res){
     }
   })
   */
->>>>>>> 80867b888baa45a1505f87c37d2f3016385da84f
 })
 
 app.post("/paypal",function(req, res){
@@ -475,6 +457,7 @@ app.get('/success', function(req, res){
 
 
 app.post('/profile', upload.single('avatar'), function (req, res, next) {
+  
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
 
@@ -506,11 +489,13 @@ var uploadfile = req.file;
       console.log(book.file[0].hash + "hash is saved")
 m
     })
-*/
 
-   var asresulthh = file[0]
+*/
+   var resulthash = file[0]
 console.log(resulthash)
   })
+  
+console.log("route")
 })
   
 
