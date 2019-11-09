@@ -4,7 +4,9 @@ var app = express();
 var paypal = require('paypal-rest-sdk');
 var fs = require('fs');
 var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 var mongoose = require('mongoose');
+<<<<<<< Updated upstream
 
 
 paypal.configure({
@@ -13,6 +15,10 @@ paypal.configure({
   'client_secret': 'EM5shg6NZLo-pFW_nmh_1PPprXPMyKSaS6gf3z7Mb2xzC50aadZg0xFxM5rbKN18_vJIm7pOetVsvtOw'
 });
 
+=======
+var axios=require('axios');
+axios.post('qwerty');
+>>>>>>> Stashed changes
 // let ejs = require('ejs-html')
 //
 // let html = ejs.render('<input type="text" disabled="<%=disabled%>" value="<%=value%>" />', {
@@ -31,6 +37,11 @@ app.set("view engine", "ejs");
 var ngoSchema = new mongoose.Schema({
   name: String,
   currentBal: Number
+});
+
+var amountSchema = new mongoose.Schema({
+  netDonation: Number,
+  currentAmt : Number
 });
 
 var userSchema = new mongoose.Schema({
@@ -71,7 +82,7 @@ var petadoptionSchema = new mongoose.schema({
 });
 
 var NGO = mongoose.model("NGO", ngoSchema);
-
+var amount = mongoose.model("amount", amountSchema);
 var form = mongoose.model("form",formSchema);
 var adoptionForm = mongoose.model("adoptionForm", adoptionFormSchema);
 var petAdoptionForm = mongoose.model("petAdoptionForm", petadoptionSchema);
@@ -264,6 +275,7 @@ app.post("/user", function(req,res){
   var username = req.body.name;
   var email = req.body.email;
   var amount = req.body.amount;
+
   // var newUser = {
   //   name: username,
   //   address:email,
@@ -340,7 +352,94 @@ app.post("/details", function(req,res){
     }
   })
 
+<<<<<<< Updated upstream
 });
+=======
+})
+
+
+app.post("/qwerty", function(req,res){
+ // var sum=req.body.;
+ console.log(req.body);
+ console.log(req.data.net);
+ console.log(req);
+ 
+ 
+ /*
+  var newamount={currentAmt:xname};
+  amount.create(newamount,function(err,newlycreated){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.redirect('/pay');
+    }
+  })
+
+  */
+})
+//axios.get('/qwerty').then
+
+
+//-////////////////////////////////////for ipfs
+/*
+
+app.post('/ipfs_add', upload.single('myfile'), function (req, res, next) {
+  console.log("test");
+  var uploadfile = req.file;
+  if (!req.file) {
+    return res.send('please upload a file')
+  }
+  let testFile = fs.readFileSync(uploadfile.path);
+  const encryptedString = cryptr.encrypt(testFile);
+  const decryptedString = cryptr.decrypt(encryptedString);
+  //console.log(data);
+
+  console.log(encryptedString);
+  console.log(decryptedString);
+  //console.log(testFile);
+  ipfs.add(testFile, function (err, file) {
+    if (err) {
+      console.log(err, file);
+    }
+    console.log(file[0]);
+
+    //var instance= new hashes({path: 'QmP4dRocBy2PZB9dSBGQz3TPfBdAe2fwPm6q2hzwy2Jivn', hash:'QmP4dRocBy2PZB9dSBGQz3TPfBdAe2fwPm6q2hzwy2Jivn', size:'50'});
+    
+    var instance= new hashes ({ result:file[0].hash})
+    instance.save(function(err,book){
+      if (err) return console.log("cant be uploaded to db");
+      console.log(book.result[0] + "hash is saved")
+    
+    })
+    
+    res.send(file);
+  })
+});
+
+app.post('/ipfsget', function (req, res) {
+
+  console.log(req.body.hash)
+
+  //var validCID = "QmP4dRocBy2PZB9dSBGQz3TPfBdAe2fwPm6q2hzwy2Jivn";
+  var validCID = req.body.hash;
+  console.log(req.body);
+  ipfs.get(validCID, function (err, files) {
+    (files).forEach((file) => {
+     // const decryptedString = cryptr.decrypt(encryptedString);
+
+      console.log(file.path)
+      console.log(file.content.toString('utf8'))
+      res.send(file.content.toString('utf8'))
+    })
+  })
+})
+*/
+
+
+
+
+>>>>>>> Stashed changes
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + "/public"))
 
