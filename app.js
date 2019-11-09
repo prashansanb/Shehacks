@@ -5,7 +5,19 @@ var paypal = require('paypal-rest-sdk');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+var Web3 = require('web3')
+var accounts = require('web3-eth-accounts')
+
 var mongoose = require('mongoose');
+<<<<<<< Updated upstream
+=======
+var ipfsClient = require('ipfs-http-client')
+var ipfs = ipfsClient('ipfs.infura.io', '5001', {
+  protocol: 'https'
+})
+>>>>>>> Stashed changes
 
 
 paypal.configure({
@@ -14,7 +26,10 @@ paypal.configure({
   'client_secret': 'EM5shg6NZLo-pFW_nmh_1PPprXPMyKSaS6gf3z7Mb2xzC50aadZg0xFxM5rbKN18_vJIm7pOetVsvtOw'
 });
 
+<<<<<<< Updated upstream
 var axios=require('axios');
+=======
+>>>>>>> Stashed changes
 // let ejs = require('ejs-html')
 //
 // let html = ejs.render('<input type="text" disabled="<%=disabled%>" value="<%=value%>" />', {
@@ -168,6 +183,9 @@ app.post("/adopt", function(req, res){
     }
   });
 });
+
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotalySecretKey');
 
 app.post("/petAdoption", function(req, res){
   var name = req.body.name;
@@ -366,6 +384,7 @@ app.post("/details", function(req,res){
     else{
       res.redirect("/");
     }
+<<<<<<< Updated upstream
   }) 
 });
 
@@ -429,6 +448,12 @@ app.post('/ipfsget', function (req, res) {
 
 
 
+=======
+  })
+
+});
+
+>>>>>>> Stashed changes
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + "/public"))
 
