@@ -1,9 +1,17 @@
 var express = require('express');
 var ejs = require('ejs');
 var app = express();
+var paypal = require('paypal-rest-sdk');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AdS2CHNXhJyQu9Pk85CuQJccBLTDRvLbtBHmUNxF6li2qmLQhhgUAZOENj69glXj3KDcgu78nmHOHUaA',
+  'client_secret': 'EM5shg6NZLo-pFW_nmh_1PPprXPMyKSaS6gf3z7Mb2xzC50aadZg0xFxM5rbKN18_vJIm7pOetVsvtOw'
+});
 
 // let ejs = require('ejs-html')
 //
@@ -180,6 +188,45 @@ app.post("/user", function(req,res){
   // })
 });
 
+
+app.get("/abc", function(req, res){
+  res.render('paypal.ejs');
+})
+
+app.post("/paypal",function(req, res){
+  var amt = req.params.amount;
+  var create_payment_json = {
+    "intent": "sale",
+    "payer": {
+        "payment_method": "paypal"
+    },
+    "redirect_urls": {
+        "return_url": "http://localhost:3000/success",
+        "cancel_url": "http://localhost:3000/cancel"
+    },
+    "transactions": [{
+        "amount": {
+            "currency": "INR",
+            "total": "5.00"
+        },
+        "description": "Donation"
+    }]
+};
+
+paypal.payment.create(create_payment_json, function (error, payment) {
+    if (error) {
+        throw error;
+    } else {
+        for(var i = 0; i < payment.links.length; i++){
+          if(payment.links[i].rel === 'approval_url'){
+            res.redirect(payment.links[i].href);
+          }
+        }
+    }
+});
+
+});
+
 app.post("/details", function(req,res){
   var name = req.body.name;
   var email = req.body.email;
@@ -202,10 +249,40 @@ app.post("/details", function(req,res){
     }
   })
 
-})
+});
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + "/public"))
 
+app.get('/success', function(req, res){
+  const payerId = req.query.PayerID;
+  const paymentId = req.query.paymentId;
+
+  const execute_payment_json = {
+    "payer_id": payerId,
+    "transactions": [{
+        "amount": {
+            "currency": "INR",
+            "total": "5.00"
+        }
+    }]
+  };
+
+  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+    if (error) {
+        console.log(error.response);
+        throw error;
+    } else {
+        console.log("Get Payment Response");
+        console.log(JSON.stringify(payment));
+        res.send('Success');
+    } 
+});
+});
+
+
+app.get('/cancel', function(req, res){
+  res.send("Cancelled");
+})
 
  app.set('port', process.env.PORT || 3000);
  app.listen(3000, function(){
