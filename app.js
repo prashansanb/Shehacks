@@ -46,9 +46,35 @@ var formSchema = new mongoose.Schema({
   time:String
 });
 
+var adoptionFormSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phoneNo: Number,
+  address: String,
+  famMembers: Number,
+  maritalStatus: String,
+  children: Number,
+  income: Number,
+  reason: String
+});
+
+var petadoptionSchema = new mongoose.schema({
+  name: String,
+  email: String,
+  phoneNo: Number,
+  address: String,
+  famMembers: Number,
+  maritalStatus: String,
+  pets: Number,
+  income: Number,
+  reason: String
+});
+
 var NGO = mongoose.model("NGO", ngoSchema);
 
 var form = mongoose.model("form",formSchema);
+var adoptionForm = mongoose.model("adoptionForm", adoptionFormSchema);
+var petAdoptionForm = mongoose.model("petAdoptionForm", petadoptionSchema);
 var user = mongoose.model("user", userSchema);
 // NGO.create(
 //   {
@@ -103,6 +129,71 @@ app.get("/volunteer", function(req,res){
   //       res.end();
   // })
 });
+
+app.post("/adopt", function(req, res){
+  var name = req.body.name;
+  var email = req.body.email;
+  var phoneNo = req.body.phoneNo;
+  var address = req.body.address;
+  var famMembers = req.body.famMembers;
+  var maritalStatus = req.body.maritalStatus;
+  var children = req.body.children;
+  var income = req.body.income;
+  var reason = req.body.reason;
+
+  var newAdoption = {
+    name: name,
+    email: email,
+    phoneNo: phoneNo,
+    address: address,
+    famMembers: famMembers,
+    maritalStatus: maritalStatus,
+    children: children,
+    income: income,
+    reason: reason
+  }
+
+  adoptionForm.create(newAdoption, function(err, newlycreated){
+    if(err){
+      console.log(err);
+    } else{
+      res.redirect("/");
+    }
+  });
+});
+
+app.post("/petAdoption", function(req, res){
+  var name = req.body.name;
+  var email = req.body.email;
+  var phoneNo = req.body.phoneNo;
+  var address = req.body.address;
+  var famMembers = req.body.famMembers;
+  var maritalStatus = req.body.maritalStatus;
+  var pets = req.body.pets;
+  var income = req.body.income;
+  var reason = req.body.reason;
+
+  var newAdoption = {
+    name: name,
+    email: email,
+    phoneNo: phoneNo,
+    address: address,
+    famMembers: famMembers,
+    maritalStatus: maritalStatus,
+    pets: pets,
+    income: income,
+    reason: reason
+  }
+
+  petAdoptionForm.create(newAdoption, function(err, newlycreated){
+    if(err){
+      console.log(err);
+    } else{
+      res.redirect("/");
+    }
+  });
+});
+
 app.get("/adoption", function(req,res){
   res.render("adoption.ejs");
   // res.writeHead(200, {'Content-Type': 'text/html'});
