@@ -119,6 +119,9 @@
             color: red;
         }
     </style>
+
+
+
 </head>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -181,10 +184,18 @@
                         "last inserted value into the blockchain is : " + xname;
                     //var sum= xname;
                     //     const amt= JSON.stringify({xname});
-  
+                    const config = {
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                    };
+                    const amt=xname;
+                    const body=JSON.stringify({"amt":amt});
+                    console.log(body);
                     axios({
                         method: 'post',
                         url: '/qwerty',
+<<<<<<< HEAD
                         data: JSON.stringify(xname)
                         data: {
                             net: "abcd"
@@ -193,7 +204,14 @@
                         console.log("getvalue executed");
                     });
 
+=======
+                        data: body
+                    }).then(function(res){
+                        console.log("executedddddd");
+                    })
+>>>>>>> changes to some of the routes
                 }
+                
             });
             //console.log("getvalue executed");
 
@@ -265,7 +283,11 @@
 
     }
 
+<<<<<<< HEAD
    function abc(){
+=======
+    function abc(){
+>>>>>>> changes to some of the routes
     var xvalue = document.getElementById("xvalue");
     var don = document.getElementById("don");
     var donbtn = document.getElementById("donbtn");
@@ -282,7 +304,11 @@
     <div id="metamask"></div>
     <h1 style="text-align: center; font-family: fantasy; font-weight: 400">Donate Here</h1>
 
+<<<<<<< HEAD
     <form method="post" action="/paypal" id = "myform">
+=======
+    <form method="post" action="/razor">
+>>>>>>> changes to some of the routes
 
         <ul class="form-style-1">
             <li>
@@ -299,11 +325,19 @@
             </li>
             <li>
                 <label>Donation(INR) <span class="required">*</span></label>
+<<<<<<< HEAD
                 <input id = "don" type="text" name="amount" class="field-long" />
             </li>
 
             <li>
                 <input id="donbtn" type="submit" value="Submit" onclick="abc()" />
+=======
+                <input id="don" type="text" name="amount" class="field-long" />
+            </li>
+
+            <li>
+                <input id= "donbtn" type="submit" value="Submit" onclick="abc()"/>
+>>>>>>> changes to some of the routes
             </li>
 
 
@@ -327,8 +361,9 @@
         </tr>
     </table>
 
+    <!-- <form action="/qwerty"></form> -->
 
-
+    <code><button style="visibility: hidden;" type="butoon" id="paymentclick">pay amount</button> </code>
 </body>
 
 </html>
