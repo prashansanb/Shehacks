@@ -1,0 +1,51 @@
+<code>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</code>
+
+<code>
+    <script>
+        // var n = <%= JSON.stringify(amount) %> 
+        // console.log(n);
+        options = {
+            "key": "rzp_test_u3RXMEBSXoguhK",
+            "key_secret": 'knaggRntkm9nzn1gH0uLDEXd',
+            "amount": '<%=amount*100%>', // Example: 2000 paise = INR 20
+            "name": "MERCHANT name",
+            "description": "description",
+            "image": "img/logo.png", // COMPANY LOGO
+            "handler": function (response) {
+                if(typeof response.razorpay_payment_id=='undefined'|| response.razorpay_payment_id<1)
+                  redirect_url='/index.html';
+                else{
+                    redirect_url='/index.html';
+                }
+                location.href = redirect_url;
+                // AFTER TRANSACTION IS COMPLETE YOU WILL GET THE RESPONSE HERE.
+            },
+            "prefill": {
+                "name": "", // pass customer name
+                "email": '', // customer email
+                "contact": '' //customer phone no.
+            },
+            "notes": {
+                "address": "address" //customer address 
+            },
+            "theme": {
+                "color": "#15b8f3" // screen color
+            },
+        };
+        console.log(options);
+
+        /*
+        var razorpay = new Razorpay({
+            key: "rzp_test_u3RXMEBSXoguhK",
+            key_secret: 'knaggRntkm9nzn1gH0uLDEXd',
+            callback_url: 'index.html',
+            redirect: true
+        })
+*/
+        var propay = new Razorpay(options);
+        propay.open();
+    </script>
+
+</code>

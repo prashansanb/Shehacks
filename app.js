@@ -60,8 +60,7 @@ var formSchema = new mongoose.Schema({
   name:String,
   email:String,
   phone:String,
-  why:String,
-  time:String
+  amount:Number
 });
 
 var adoptionFormSchema = new mongoose.Schema({
@@ -169,7 +168,11 @@ app.get("/volunteer", function(req,res){
 });
 
 app.post("/adopt", function(req, res){
+<<<<<<< HEAD
 console.log("route2working")
+=======
+  console.log("adopt post route rendered");
+>>>>>>> changes to some of the routes
   var name = req.body.name;
   var email = req.body.email;
   var phoneNo = req.body.phoneNo;
@@ -201,6 +204,7 @@ console.log("route2working")
     }
   });
 });
+
 
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
@@ -285,8 +289,14 @@ app.get("/ngos", function(req,res){
 });
 
 app.get("/:ngoname/transactions", function(req,res){
+  var arr = amount.find();
+  var sum = 0;
+  // arr.forEach(function(a){
+  //   sum= sum+a.currentAmt;
+  // })
+  console.log(arr);
   res.render("transactions.ejs",{
-    name:req.params.ngoname
+    sum:sum
   });
 });
 
@@ -343,9 +353,28 @@ app.get('/cancel', function(req, res){
 app.get("/abc", function(req, res){
   res.render('paypal.ejs');
 })
-app.post("/qwerty", function(req, res){
-  console.log("working axios");
-  console.log(req.data);
+// app.post("/qwerty", function(req, res){
+//   console.log("working axios");
+
+//   var obj = req.body;
+//   console.log(obj[Object.keys(obj)[0]]);
+//   console.log(req.body);
+//   console.log(req.body[0]);
+//   // var val = req.body[0][1];
+//   // console.log(val);
+//   var newamount = {
+//     currentAmt: val,
+//     netDonation: val
+//   };
+
+  // amount.create(newamount, function(err, newlycreated){
+  //   if(err){
+  //     console.log(err);
+  //   } else{
+  //     console.log(newlycreated);
+  //     res.redirect("/pay");
+  //   }
+  // })
  /*
   var val = req.data;
   var ans = 0;
@@ -366,6 +395,32 @@ app.post("/qwerty", function(req, res){
     }
   })
   */
+// })
+
+
+app.post("/razor", function(req, res){
+  var amt = req.body.amount;
+  // var ans = 0;
+  // db.amounts.find().forEach(function(abc){
+  //   ans = ans+abc.currentAmt;
+  // });
+  // ans = ans+val;
+  var newamount = {
+    currentAmt: amt,
+    netDonation: amt
+  };
+  amount.create(newamount, function(err, newlycreated){
+    if(err){
+      console.log(err);
+    } else{
+      console.log(newlycreated);
+      // res.redirect("/pay");
+    }
+  })
+
+  // console.log(amt);
+  res.render('razor.ejs', {amount: amt});
+  
 })
 
 app.post("/paypal",function(req, res){
@@ -376,7 +431,7 @@ app.post("/paypal",function(req, res){
         "payment_method": "paypal"
     },
     "redirect_urls": {
-        "return_url": "http://localhost:3000/success",
+        "return_url": "http://localhost:3000",
         "cancel_url": "http://localhost:3000/cancel"
     },
     "transactions": [{
@@ -460,7 +515,7 @@ app.post('/profile', upload.single('avatar'), function (req, res, next) {
   
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
-
+  console.log("profile post route rendered");
 var uploadfile = req.file;
   if (!req.file) {
     return res.send('please upload a file')
@@ -480,7 +535,7 @@ var uploadfile = req.file;
       console.log(file[0]);
     }
     
-    // var ipfsshash= file[0].hash;
+    //var ipfsshash= file[0].hash;
    // let instance = new hashes({ hash: file[0].hash });
   /* 
     let instance = new hashes({ hash: "QmTDvbSnKgntL596jKypKGknqGRtcWB1xqPefaDbWv3FDx"});
@@ -490,14 +545,46 @@ var uploadfile = req.file;
 m
     })
 
+<<<<<<< HEAD
 */
    var resulthash = file[0]
 console.log(resulthash)
+=======
+   var resulthash= file[0]
+console.log(resulthash);
+alert(resulthash);
+// alert("Successfully added to IPFS. Hash is" + resulthash);
+res.redirect('/');
+>>>>>>> changes to some of the routes
   })
   
 console.log("route")
 })
   
+/*
+app.post('/razorpay', function(req, res){
+  var instance = new razorpay({
+    key_id: 'rzp_test_u3RXMEBSXoguhK',
+    key_secret: 'knaggRntkm9nzn1gH0uLDEXd',
+  });
+
+  instance.payments.fetch(paymentId);
+  instance.payments.all({
+    from: '2019-10-10',
+    to: '2019-10-11'
+  }, (error, response) => {
+    if (error) {
+      console.log("error1");
+      // handle error
+    } else {
+      console.log("success1");
+      // handle success
+    }
+  })
+
+});
+*/
+
 
 
 app.get('/cancel', function(req, res){
