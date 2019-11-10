@@ -195,21 +195,11 @@
                     axios({
                         method: 'post',
                         url: '/qwerty',
-<<<<<<< HEAD
-                        data: JSON.stringify(xname)
-                        data: {
-                            net: "abcd"
-                        }
-                    }).then(function (res) {
-                        console.log("getvalue executed");
-                    });
-
-=======
                         data: body
                     }).then(function(res){
                         console.log("executedddddd");
                     })
->>>>>>> changes to some of the routes
+
                 }
                 
             });
@@ -283,11 +273,7 @@
 
     }
 
-<<<<<<< HEAD
-   function abc(){
-=======
     function abc(){
->>>>>>> changes to some of the routes
     var xvalue = document.getElementById("xvalue");
     var don = document.getElementById("don");
     var donbtn = document.getElementById("donbtn");
@@ -304,11 +290,7 @@
     <div id="metamask"></div>
     <h1 style="text-align: center; font-family: fantasy; font-weight: 400">Donate Here</h1>
 
-<<<<<<< HEAD
-    <form method="post" action="/paypal" id = "myform">
-=======
     <form method="post" action="/razor">
->>>>>>> changes to some of the routes
 
         <ul class="form-style-1">
             <li>
@@ -325,19 +307,11 @@
             </li>
             <li>
                 <label>Donation(INR) <span class="required">*</span></label>
-<<<<<<< HEAD
-                <input id = "don" type="text" name="amount" class="field-long" />
-            </li>
-
-            <li>
-                <input id="donbtn" type="submit" value="Submit" onclick="abc()" />
-=======
                 <input id="don" type="text" name="amount" class="field-long" />
             </li>
 
             <li>
                 <input id= "donbtn" type="submit" value="Submit" onclick="abc()"/>
->>>>>>> changes to some of the routes
             </li>
 
 

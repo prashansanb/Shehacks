@@ -168,11 +168,7 @@ app.get("/volunteer", function(req,res){
 });
 
 app.post("/adopt", function(req, res){
-<<<<<<< HEAD
-console.log("route2working")
-=======
   console.log("adopt post route rendered");
->>>>>>> changes to some of the routes
   var name = req.body.name;
   var email = req.body.email;
   var phoneNo = req.body.phoneNo;
@@ -547,18 +543,16 @@ m
 
 <<<<<<< HEAD
 */
-   var resulthash = file[0]
-console.log(resulthash)
-=======
+
    var resulthash= file[0]
 console.log(resulthash);
-alert(resulthash);
+//alert(resulthash);
 // alert("Successfully added to IPFS. Hash is" + resulthash);
 res.redirect('/');
->>>>>>> changes to some of the routes
+
   })
   
-console.log("route")
+//console.log("route")
 })
   
 /*
